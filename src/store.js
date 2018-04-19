@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { db } from '@/firebase'
 
 Vue.use(Vuex)
 
@@ -24,11 +25,29 @@ export default new Vuex.Store({
     setPlayer ({ commit }, players) {
       commit('setPlayer', players)
     },
-    player1Join ({ commit }, status) {
-      commit('player1Join', status)
+    player1Join ({ commit }) {
+      db.ref('RoomMinefield').child('player1').update({
+        status : true
+      })
+      commit('player1Join', true)
     },
-    player2Join ({ commit }, status) {
-      commit('player2Join', status)
+    player2Join ({ commit }) {
+      db.ref('RoomMinefield').child('player2').update({
+        status : true
+      })
+      commit('player2Join', true)
+    },
+    player1Finish ({ commit }) {
+      db.ref('RoomMinefield').child('player1').update({
+        status : false
+      })
+      commit('player1Join', false)
+    },
+    player2Finish ({ commit }) {
+      db.ref('RoomMinefield').child('player2').update({
+        status : false
+      })
+      commit('player2Join', false)
     }
   }
 })
