@@ -11,9 +11,9 @@
     
   </div> -->
 
-    
-    <button type="submit" class="btn btn-login float-right" @click="player1Join()">JOIN</button>
-  
+    <div v-if="player">
+    <button v-show="!player.player1.status" type="submit" class="btn btn-login float-right" @click="player1Join()">JOIN</button>
+    </div>
   
 		</div>
 
@@ -27,8 +27,10 @@
   </div>
    -->
     <div class="form-check">
-    <button  type="submit" class="btn btn-login float-right" @click="player1Join()">JOIN</button>
-  </div>
+         <div v-if="player">
+    <button v-show="!player.player2.status" type="submit" class="btn btn-login float-right" @click="player2Join()">JOIN</button>
+    </div>
+     </div>
   
 </form>
 
@@ -80,11 +82,30 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "Login",
   props: {
     msg: String
-  }
+  },
+  methods: {
+    ...mapActions([
+      "player1Join",
+      "player2Join",
+      "player1Finish",
+      "player2Finish"
+    ])
+  },
+  created() {
+    let roomMineRef = db.ref("RoomMinefield");
+    roomMineRef.on("value", snapshot => {
+      console.log(snapshot.val());
+      console.log(this);
+      this.$store.dispatch("setPlayer", snapshot.val());
+    });
+  },
+  computed: mapState(["player1", "player2", "player"])
 };
 </script>
 
