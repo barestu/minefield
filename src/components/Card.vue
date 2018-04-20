@@ -22,8 +22,9 @@ import { boardRef } from '@/firebase.js'
 import cardBack from '@/assets/img/card-back.jpg'
 import cardBoom from '@/assets/img/card-boom.png'
 import cardSafe from '@/assets/img/card-safe.jpg'
-// import cron from 'cron'
-// const CronJob = cron.CronJob
+import { db } from '@/firebase'
+import cron from 'cron'
+const CronJob = cron.CronJob
 
 export default {
   name: 'Card',
@@ -39,15 +40,17 @@ export default {
     boards: boardRef
   },
   methods: {
+    scan () {
+
+    },
     flipCard (data) {
-      if (data.status === 'bom') {
-        let key = data['.key']
-        boardRef.child(key).update({ isActive: false })
-      }
       let key = data['.key']
       boardRef.child(key).update({
         isAlive: true
       })
+      if (data.status === 'bom') {
+        db.ref('status').update({isWin: true})
+      }
     }
   }
 }
