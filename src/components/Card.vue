@@ -1,5 +1,5 @@
 <template>
-<div class="card-field mx-auto" id="flip" @click="flipCard(board)">
+<div class="card-field mx-auto" id="flip" @click="flipCard(board)" :class="{clickNone: clickNone}">
   <div id="card" :class="{flipped: board.isAlive}">
     <figure class="front">
       <img :src="cardBack" class="card-img p-1" style="height: 100%;"/>
@@ -33,7 +33,8 @@ export default {
     return {
       cardBack: cardBack,
       cardBoom: cardBoom,
-      cardSafe: cardSafe
+      cardSafe: cardSafe,
+      clickNone: false
     }
   },
   firebase: {
@@ -41,7 +42,14 @@ export default {
   },
   methods: {
     scan () {
-
+      console.log('------------------------------------------------------')
+      let players = this.$store.state.players
+      console.log(players)
+      if (players.length === 0) {
+        this.clickNone = true
+      } else {
+        this.clickNone = false
+      }
     },
     flipCard (data) {
       let key = data['.key']
@@ -52,6 +60,9 @@ export default {
         db.ref('status').update({isWin: true})
       }
     }
+  },
+  created: function () {
+    this.scan()
   }
 }
 </script>
@@ -97,5 +108,9 @@ export default {
 .card-img {
   height: 100%;
   background-size: cover
+}
+
+.clickNone {
+  pointer-events:none;
 }
 </style>
