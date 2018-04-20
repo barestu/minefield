@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    boards: []
+    boards: [],
+    players: ''
   },
   getters: {
     startGame: (state) => {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     update (state, payload) {
       state.boards = payload
+    },
+    playerJoin (state, payload) {
+      state.players = payload
     }
   },
   actions: {
@@ -34,14 +38,14 @@ export default new Vuex.Store({
         status: true
       })
       document.getElementById('button2').setAttribute('disabled', 'disabled')
-      commit('player1Join', true)
+      commit('playerJoin', 'player1')
     },
     player2Join ({ commit }) {
       db.ref('RoomMinefield').child('player2').update({
         status: true
       })
       document.getElementById('button1').setAttribute('disabled', 'disabled')
-      commit('player2Join', true)
+      commit('playerJoin', 'player2')
     },
     player1Finish ({ commit }) {
       db.ref('RoomMinefield').child('player1').update({

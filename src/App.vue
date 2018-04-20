@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="background">
     <div id="nav">
-      <router-link to="/">Home</router-link>
     </div>
     <router-view />
   </div>
