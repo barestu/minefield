@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="container">
-      <div v-if="show" class="row ml-auto">
-        <div v-bind:key="index" v-for="(board, index) in boards" class="col-3" id="fieldCard">
+      <div class="row ml-auto">
+        <div v-bind:key="index" v-for="(board, index) in box" class="col-3" id="fieldCard">
           <Card v-bind:board="board"></Card>
         </div>
       </div>
@@ -25,18 +25,16 @@ export default {
   data () {
     return {
       name: '',
-      show: false
+      box: this.$store.state.boards
     }
   },
   firebase: {
     boards: boardRef
   },
   created: function () {
-  //   this.$store.commit('showcard',this.boards)
+    this.$store.commit('showcard', this.boards)
     this.play(this.boards)
-  },
-  updated: {
-    // this.boards
+    this.box = this.boards
   },
   methods: {
     addData () {

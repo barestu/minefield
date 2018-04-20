@@ -10,6 +10,9 @@ export default new Vuex.Store({
   mutations: {
     showcard (state, payload) {
       state.boards = payload
+    },
+    update (state, payload) {
+      state.boards = payload
     }
   },
   actions: {
