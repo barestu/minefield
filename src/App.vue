@@ -10,6 +10,3 @@
   background-color: #F4B350;
 }
 </style>
-
-
-

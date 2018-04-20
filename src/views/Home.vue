@@ -7,6 +7,7 @@
         </div>
       </div>
     </div>
+    <button type="button" @click="play(boards)">Play</button>
     <button type="button" @click="reset()">Reset</button>
   </div>
 </template>
@@ -15,14 +16,15 @@
 // @ is an alias to /src
 import Card from '@/components/Card.vue'
 import { boardRef } from '@/firebase.js'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
   name: 'home',
   data () {
     return {
       name: '',
-      box: this.$store.state.boards
+      box: this.$store.state.boards,
+      start: false
     }
   },
   components: {
@@ -33,8 +35,8 @@ export default {
   },
   created: function () {
     this.$store.commit('showcard', this.boards)
-    this.play(this.boards)
     this.box = this.boards
+    // this.play(this.boards)
   },
   methods: {
     addData () {
@@ -52,14 +54,13 @@ export default {
         boardRef.child(key1).update({status: array[j].status, isAlive: array[j].isAlive})
         boardRef.child(key2).update({status: temp.status, isAlive: temp.isAlive})
       }
-      this.show = true
     },
     reset () {
+      // this.play(this.boards)
       this.boards.forEach(board => {
         let key = board['.key']
         boardRef.child(key).update({isAlive: false})
       })
-      this.show = false
     },
     changeStatus (data) {
       let key = data['.key']

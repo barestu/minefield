@@ -10,7 +10,7 @@
         <img :src="cardBoom" class="card-img py-1" style="height: 100%;"/>
       </h1>
       <h1 v-else>
-        <img :src="cardSafe" class="card-img py-1" style="height: 100%;"/>      
+        <img :src="cardSafe" class="card-img py-1" style="height: 100%;"/>
       </h1>
     </figure>
   </div>
@@ -22,6 +22,8 @@ import { boardRef } from '@/firebase.js'
 import cardBack from '@/assets/img/card-back.jpg'
 import cardBoom from '@/assets/img/card-boom.png'
 import cardSafe from '@/assets/img/card-safe.jpg'
+// import cron from 'cron'
+// const CronJob = cron.CronJob
 
 export default {
   name: 'Card',
@@ -38,6 +40,10 @@ export default {
   },
   methods: {
     flipCard (data) {
+      if (data.status === 'bom') {
+        let key = data['.key']
+        boardRef.child(key).update({ isActive: false })
+      }
       let key = data['.key']
       boardRef.child(key).update({
         isAlive: true
