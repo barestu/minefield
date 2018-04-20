@@ -1,29 +1,36 @@
 <template>
-<!-- <img :src="cardImage" class="card-img py-1" style="height: 100%;"/> -->
-<div class="card-field mx-auto border" id="flip" @click="flipCard(board)">
+<div class="card-field mx-auto" id="flip" @click="flipCard(board)">
   <div id="card" :class="{flipped: board.isAlive}">
     <figure class="front">
-      1
+      <img :src="cardBack" class="card-img py-1" style="height: 100%;"/>
     </figure>
     <figure class="back">
-      {{ board.status }} {{ board.isAlive }}
-      <h1 v-if="board.status !== 'bom'">b</h1>
-      <h1 v-else>s</h1>
+      <!-- {{ board.status }} {{ board.isAlive }} -->
+      <h1 v-if="board.status === 'bom'">
+        <img :src="cardBoom" class="card-img py-1" style="height: 100%;"/>
+      </h1>
+      <h1 v-else>
+        <img :src="cardSafe" class="card-img py-1" style="height: 100%;"/>      
+      </h1>
     </figure>
   </div>
 </div>
 </template>
 
 <script>
-import { boardRef } from '@/assets/js/firebase.js'
-import image from '@/assets/img/ground_grass.jpg'
+import { boardRef } from '@/firebase.js'
+import cardBack from '@/assets/img/card-back.jpg'
+import cardBoom from '@/assets/img/card-boom.png'
+import cardSafe from '@/assets/img/card-safe.jpg'
 
 export default {
   name: 'Card',
   props: ['board'],
   data: function () {
     return {
-      cardImage: image
+      cardBack: cardBack,
+      cardBoom: cardBoom,
+      cardSafe: cardSafe
     }
   },
   firebase: {
@@ -40,7 +47,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .card-field {
   position: relative;
@@ -67,15 +73,20 @@ export default {
 }
 
 #card .front {
-  background: red;
+  background: #fbfbfb;
 }
 
 #card .back {
-  background: blue;
+  background: #fbfbfb;
   transform: rotateY( 180deg);
 }
 
 #card.flipped {
   transform: rotateY( 180deg);
+}
+
+.card-img {
+  height: 100%;
+  background-size: cover
 }
 </style>

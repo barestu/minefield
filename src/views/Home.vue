@@ -1,13 +1,12 @@
 <template>
-  <div class="home">
+  <div class="home border">
     <div class="container">
       <div class="row ml-auto">
-        <div v-bind:key="index" v-for="(board, index) in box" class="col-3" id="fieldCard">
+        <div v-bind:key="index" v-for="(board, index) in box" class="col-3 my-1" id="fieldCard">
           <Card v-bind:board="board"></Card>
         </div>
       </div>
     </div>
-    <!-- <button type="button" @click="play(boards)">Play</button> -->
     <button type="button" @click="reset()">Reset</button>
   </div>
 </template>
@@ -15,7 +14,7 @@
 <script>
 // @ is an alias to /src
 import Card from '@/components/Card.vue'
-import { boardRef } from '@/assets/js/firebase.js'
+import { boardRef } from '@/firebase.js'
 import { mapState } from 'vuex'
 
 export default {
@@ -40,7 +39,7 @@ export default {
   methods: {
     addData () {
       boardRef.push({
-        status: 'safeToHit',
+        status: 'bom',
         isAlive: false
       })
     },
@@ -76,7 +75,8 @@ export default {
 <style scoped>
 .home {
   margin: 0 210px;
-  background-color: palevioletred;
+  background-color: #ffffff;
+  height: 100%;
 }
 
 #fieldCard {
