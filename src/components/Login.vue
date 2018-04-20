@@ -82,31 +82,31 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "Login",
+  name: 'Login',
   props: {
     msg: String
   },
   methods: {
     ...mapActions([
-      "player1Join",
-      "player2Join",
-      "player1Finish",
-      "player2Finish"
+      'player1Join',
+      'player2Join',
+      'player1Finish',
+      'player2Finish'
     ])
   },
   created() {
-    let roomMineRef = db.ref("RoomMinefield");
-    roomMineRef.on("value", snapshot => {
-      console.log(snapshot.val());
-      console.log(this);
-      this.$store.dispatch("setPlayer", snapshot.val());
-    });
+    let roomMineRef = db.ref('RoomMinefield')
+    roomMineRef.on('value', snapshot => {
+      console.log(snapshot.val())
+      console.log(this)
+      this.$store.dispatch('setPlayer', snapshot.val())
+    })
   },
-  computed: mapState(["player1", "player2", "player"])
-};
+  computed: mapState(['player1', 'player2', 'player'])
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
