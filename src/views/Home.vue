@@ -1,14 +1,31 @@
 <template>
-  <div class="home border">
-    <div class="container">
-      <div class="row ml-auto">
-        <div v-bind:key="index" v-for="(board, index) in box" class="col-3 my-1" id="fieldCard">
-          <Card v-bind:board="board"></Card>
+  <div class="home">
+    <div class="container mx-auto">
+      <div class="text-center">
+        <h1 class="display-4">The Minefield Game</h1>
+      </div>
+
+      <div class="row ml-auto border">
+        <div class="col-md-8 offset-md-2 board border">
+          <div class="row">
+          <!-- CARD -->
+          <div v-bind:key="index" v-for="(board, index) in box" class="col-md-3 border" id="fieldCard">
+            <Card v-bind:board="board"></Card>
+          </div>
+
+          </div>
         </div>
       </div>
+      
+      <div class="text-right p-2">
+        <button type="button" class="btn btn-info" @click ="reset()">Reset</button>
+      </div>
     </div>
+<<<<<<< 27bd78d24c45ceba5ba745aa7e7748545565289c
     <button type="button" @click="play(boards)">Play</button>
     <button type="button" @click="reset()">Reset</button>
+=======
+>>>>>>> styling game board
   </div>
 </template>
 
@@ -74,13 +91,15 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  margin: 0 210px;
-  background-color: #ffffff;
-  height: 100%;
+h1 {
+  font-family: 'Coda', cursive;
+}
+
+.board {
+  background-color: whitesmoke; 
 }
 
 #fieldCard {
-  height: 140px;
+  height: 130px;
 }
 </style>
