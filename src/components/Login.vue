@@ -18,7 +18,7 @@
 		</div>
 
     <div class="col-md-4 login-sec">
-		    <h2 class="text-center">Player 2</h2>
+		  <h2 class="text-center">Player 2</h2>
 		    <form class="login-form">
   <!-- <div class="form-group">
     <label for="exampleInputEmail1" class="text-uppercase">Enter Your Name</label>
@@ -35,7 +35,6 @@
 </form>
 
 		</div>
-
 
 		<div class="col-md-8 banner-sec">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -75,39 +74,38 @@
             </div>	   
 		    
 		</div>
-	</div>
+</div>
 </div>
     </div>
 </section>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "Login",
+  name: 'Login',
   props: {
     msg: String
   },
   methods: {
     ...mapActions([
-      "player1Join",
-      "player2Join",
-      "player1Finish",
-      "player2Finish"
+      'player1Join',
+      'player2Join',
+      'player1Finish',
+      'player2Finish'
     ])
   },
-  created() {
-    let roomMineRef = db.ref("RoomMinefield");
-    roomMineRef.on("value", snapshot => {
-      console.log(snapshot.val());
-      console.log(this);
-      this.$store.dispatch("setPlayer", snapshot.val());
-    });
+  created () {
+    // let roomMineRef = db.ref('RoomMinefield')
+    // roomMineRef.on('value', snapshot => {
+    //   console.log(snapshot.val())
+    //   console.log(this)
+    //   this.$store.dispatch('setPlayer', snapshot.val())
+    // })
   },
-  computed: mapState(["player1", "player2", "player"])
-};
+  computed: mapState(['player1', 'player2', 'player'])
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-

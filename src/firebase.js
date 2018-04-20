@@ -10,3 +10,4 @@ const app = initializeApp({
 })
 
 export const db = app.database()
+export const boardRef = db.ref('boards')
