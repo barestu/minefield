@@ -15,12 +15,8 @@
 <script>
 // @ is an alias to /src
 import Card from '@/components/Card.vue'
-<<<<<<< 1b2ff6e9b39702530a083f8054a65f7b9da38727
-import { db } from '@/firebase'
-import { mapState } from 'vuex'
-=======
 import { boardRef } from '@/assets/js/firebase.js'
->>>>>>> add logic
+import { mapState } from 'vuex'
 
 export default {
   name: 'home',
@@ -36,22 +32,12 @@ export default {
   firebase: {
     boards: boardRef
   },
-<<<<<<< 17c5dab8122d1606bb7040ab3b91eb77891ad87f
-  method: {
-    player1Join: function () {
-      this.$store.dispatch('player1Join', true)
-    },
-    player2Join: function () {
-      this.$store.dispatch('player2Join', true)
-    },
-=======
   created: function () {
     this.$store.commit('showcard', this.boards)
     this.play(this.boards)
     this.box = this.boards
   },
   methods: {
->>>>>>> flip card base on click
     addData () {
       boardRef.push({
         status: 'safeToHit',
@@ -83,22 +69,7 @@ export default {
         alert('woi ini bom')
       }
     }
-  },
-  created () {
-    let roomMineRef = db.ref('RoomMinefield')
-    roomMineRef.on('value', (snapshot) => {
-      console.log(snapshot.val())
-      console.log(this)
-      this.$store.dispatch('setPlayer', snapshot.val())
-    })
-    this.$store.commit('showcard',this.boards)
-    this.play(this.boards)
-  },
-  computed: mapState([
-    'player1',
-    'player2',
-    'player'
-  ])
+  }
 }
 </script>
 
