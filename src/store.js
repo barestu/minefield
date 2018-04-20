@@ -23,6 +23,9 @@ export default new Vuex.Store({
     },
     showcard (state, payload) {
       state.boards = payload
+    },
+    update (state, payload) {
+      state.boards = payload
     }
   },
   actions: {

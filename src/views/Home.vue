@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="container">
-      <div v-if="show" class="row ml-auto">
-        <div v-bind:key="index" v-for="(board, index) in boards" class="col-3" id="fieldCard">
+      <div class="row ml-auto">
+        <div v-bind:key="index" v-for="(board, index) in box" class="col-3" id="fieldCard">
           <Card v-bind:board="board"></Card>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       name: '',
-      show: false
+      box: this.$store.state.boards
     }
   },
   components: {
@@ -36,6 +36,7 @@ export default {
   firebase: {
     boards: boardRef
   },
+<<<<<<< 17c5dab8122d1606bb7040ab3b91eb77891ad87f
   method: {
     player1Join: function () {
       this.$store.dispatch('player1Join', true)
@@ -43,6 +44,14 @@ export default {
     player2Join: function () {
       this.$store.dispatch('player2Join', true)
     },
+=======
+  created: function () {
+    this.$store.commit('showcard', this.boards)
+    this.play(this.boards)
+    this.box = this.boards
+  },
+  methods: {
+>>>>>>> flip card base on click
     addData () {
       boardRef.push({
         status: 'safeToHit',

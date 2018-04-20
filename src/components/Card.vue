@@ -1,7 +1,7 @@
 <template>
 <!-- <img :src="cardImage" class="card-img py-1" style="height: 100%;"/> -->
 <div class="card-field mx-auto border" id="flip" @click="flipCard(board)">
-  <div id="card" :class="{flipped: this.showCard}">
+  <div id="card" :class="{flipped: board.isAlive}">
     <figure class="front">
       1
     </figure>
@@ -15,49 +15,26 @@
 </template>
 
 <script>
+import { boardRef } from '@/assets/js/firebase.js'
 import image from '@/assets/img/ground_grass.jpg'
-// import {
-//   mapState
-// } from 'vuex'
-import {
-  boardRef
-} from '@/assets/js/firebase.js'
 
 export default {
   name: 'Card',
   props: ['board'],
   data: function () {
     return {
-      cardImage: image,
-      showCard: false
+      cardImage: image
     }
   },
   firebase: {
     boards: boardRef
   },
-  // computed: {
-  //   display: function (status) {
-  //     if (status === true) {
-  //       return this.showCard = true
-  //     }
-  //   }
-  // },
   methods: {
     flipCard (data) {
       let key = data['.key']
       boardRef.child(key).update({
         isAlive: true
       })
-
-      // if (data.isAlive == true) {
-      // this.showCard = true
-      // }
-
-      // let card = document.getElementById('card')
-
-      // document.getElementById('flip').addEventListener('click', function () {
-      //   card.toggleClassName('flipped')
-      // }, false)
     }
   }
 }
