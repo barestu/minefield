@@ -47,13 +47,11 @@ export default new Vuex.Store({
       db.ref('RoomMinefield').child('player1').update({
         status: false
       })
-      commit('player1Join', false)
     },
     player2Finish ({ commit }) {
       db.ref('RoomMinefield').child('player2').update({
         status: false
       })
-      commit('player2Join', false)
     }
   }
 })
