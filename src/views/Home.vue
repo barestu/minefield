@@ -16,17 +16,18 @@
 // @ is an alias to /src
 import Card from '@/components/Card.vue'
 import { boardRef } from '@/assets/js/firebase.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'home',
-  components: {
-    Card
-  },
   data () {
     return {
       name: '',
       box: this.$store.state.boards
     }
+  },
+  components: {
+    Card
   },
   firebase: {
     boards: boardRef
@@ -69,7 +70,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
