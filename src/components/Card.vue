@@ -2,15 +2,19 @@
 <div class="card-field mx-auto" id="flip" @click="flipCard(board)">
   <div id="card" :class="{flipped: board.isAlive}">
     <figure class="front">
-      <img :src="cardBack" class="card-img py-1" style="height: 100%;"/>
+      <img :src="cardBack" class="card-img p-1" style="height: 100%;"/>
     </figure>
     <figure class="back">
       <!-- {{ board.status }} {{ board.isAlive }} -->
       <h1 v-if="board.status === 'bom'">
-        <img :src="cardBoom" class="card-img py-1" style="height: 100%;"/>
+        <img :src="cardBoom" class="card-img pt-4" style="height: 100%;"/>
       </h1>
       <h1 v-else>
+<<<<<<< 27bd78d24c45ceba5ba745aa7e7748545565289c
         <img :src="cardSafe" class="card-img py-1" style="height: 100%;"/>
+=======
+        <img :src="cardSafe" class="card-img pt-4" style="height: 100%;"/>
+>>>>>>> styling game board
       </h1>
     </figure>
   </div>
