@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     player: [],
     player1: false,
-    player2: false
+    player2: false,
+    boards: []
   },
   mutations: {
     setPlayer (state, players) {
@@ -19,6 +20,12 @@ export default new Vuex.Store({
     },
     player2Join (state, status) {
       state.player2 = status
+    },
+    showcard (state, payload) {
+      state.boards = payload
+    },
+    update (state, payload) {
+      state.boards = payload
     }
   },
   actions: {

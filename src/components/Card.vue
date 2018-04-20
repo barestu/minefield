@@ -1,41 +1,40 @@
 <template>
-  <!-- <img :src="cardImage" class="card-img py-1" style="height: 100%;"/> -->
-  <div class="card-field mx-auto border" id="flip" @click="flipCard">
-    <div id="card" :class="{flipped: this.showCard}">
-      <figure class="front">
-        1
-      </figure>
-      <figure class="back">
-        2
-      </figure>
-    </div>
+<!-- <img :src="cardImage" class="card-img py-1" style="height: 100%;"/> -->
+<div class="card-field mx-auto border" id="flip" @click="flipCard(board)">
+  <div id="card" :class="{flipped: board.isAlive}">
+    <figure class="front">
+      1
+    </figure>
+    <figure class="back">
+      {{ board.status }} {{ board.isAlive }}
+      <h1 v-if="board.status !== 'bom'">b</h1>
+      <h1 v-else>s</h1>
+    </figure>
   </div>
+</div>
 </template>
 
 <script>
+import { boardRef } from '@/assets/js/firebase.js'
 import image from '@/assets/img/ground_grass.jpg'
 
 export default {
   name: 'Card',
-  props: {
-    msg: String
-  },
+  props: ['board'],
   data: function () {
     return {
-      cardImage: image,
-      showCard: false
+      cardImage: image
     }
   },
+  firebase: {
+    boards: boardRef
+  },
   methods: {
-    flipCard () {
-      console.log('flip')
-
-      this.showCard = true
-      // let card = document.getElementById('card')
-
-      // document.getElementById('flip').addEventListener('click', function () {
-      //   card.toggleClassName('flipped')
-      // }, false)
+    flipCard (data) {
+      let key = data['.key']
+      boardRef.child(key).update({
+        isAlive: true
+      })
     }
   }
 }
@@ -73,10 +72,10 @@ export default {
 
 #card .back {
   background: blue;
-  transform: rotateY( 180deg );
+  transform: rotateY( 180deg);
 }
 
 #card.flipped {
-  transform: rotateY( 180deg );
+  transform: rotateY( 180deg);
 }
 </style>
